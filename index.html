@@ -1,1 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
 
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ulang Tahun Bro Yurun</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(to top, #000000, #0f0f0f);
+            color: #00ffcc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            transition: background 0.2s;
+        }
+
+        .glitch-bg {
+            animation: glitchBg 0.1s infinite;
+        }
+
+        @keyframes glitchBg {
+            0% {
+                background: #000;
+            }
+
+            50% {
+                background: red;
+            }
+
+            100% {
+                background: #000;
+            }
+        }
+
+        .container {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px dashed #00ffcc;
+            border-radius: 20px;
+            box-shadow: 0 0 30px #00ffff;
+        }
+
+        .photo {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 5px solid #00ffcc;
+            box-shadow: 0 0 20px #00ffff;
+            animation: spin 8s linear infinite;
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #00ffcc;
+        }
+
+        .typed-text {
+            font-size: 1.1rem;
+            color: #c0fefe;
+            white-space: pre-wrap;
+            display: inline-block;
+            text-align: left;
+            margin: 0 auto;
+            max-width: 400px;
+            min-height: 60px;
+        }
+
+        .space-emoji {
+            position: absolute;
+            font-size: 2.5rem;
+            cursor: pointer;
+            animation: floatUp 10s infinite linear;
+        }
+
+        .space-emoji:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .space-emoji:nth-child(2) {
+            left: 50%;
+            animation-delay: 3s;
+        }
+
+        .space-emoji:nth-child(3) {
+            left: 80%;
+            animation-delay: 6s;
+        }
+
+        button {
+            background-color: #00ffcc;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #00ffff;
+        }
+
+        @keyframes floatUp {
+            0% {
+                top: 100vh;
+                transform: rotate(0deg);
+            }
+
+            100% {
+                top: -10vh;
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .glitch {
+            animation: glitchText 0.1s infinite;
+            color: red;
+        }
+
+        @keyframes glitchText {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            20% {
+                transform: translate(-2px, 2px);
+            }
+
+            40% {
+                transform: translate(2px, -2px);
+            }
+
+            60% {
+                transform: translate(-1px, 1px);
+            }
+
+            80% {
+                transform: translate(1px, -1px);
+            }
+
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Floating Emojis -->
+    <div class="space-emoji" onclick="popupAlien()">🚀</div>
+    <div class="space-emoji" onclick="popupAlien()">👽</div>
+    <div class="space-emoji" onclick="popupAlien()">🛸</div>
+
+    <div class="container">
+        <div class="photo">
+            <img src="yurun.jpg" alt="Foto Ulang Tahun">
+        </div>
+        <h1 id="judul">SELAMAT ULANG TAHUN YURUN! 🎂</h1>
+        <div class="typed-text" id="typed-text"></div>
+        <button onclick="playMusic()">▶️ PLAY MUSIC</button>
+    </div>
+
+    <!-- Audio -->
+    <audio id="bg-music" src="https://cdn.pixabay.com/audio/2023/06/26/audio_2c42cd6a27.mp3" preload="auto"></audio>
+    <audio id="click-sound" src="https://freesound.org/data/previews/331/331912_3248244-lq.mp3" preload="auto"></audio>
+
+    <script>
+        const text = `"Salam dari alien di galaksi 13! maaf terlambat perlu waktu 10 hari baru pesan ini sampai ke bumi\n\nSemoga hidup angko makin baik, sehat2 umur long, dan makin KEREN KECEH BADAI. 🚀✨"`;
+        let i = 0;
+        const speed = 40;
+
+        function typeText() {
+            if (i < text.length) {
+                document.getElementById("typed-text").textContent += text.charAt(i);
+                i++;
+                setTimeout(typeText, speed);
+            }
+        }
+
+        function playMusic() {
+            document.getElementById("bg-music").play();
+            document.getElementById("click-sound").play();
+            startFakeHack();
+        }
+
+        function popupAlien() {
+            alert("👽: 'Selamat ulang tahun, BNG YURUN!");
+        }
+
+        function startFakeHack() {
+            setTimeout(() => {
+                let countdown = 5;
+                const prankInterval = setInterval(() => {
+                    if (countdown > 0) {
+                        alert(`⚠️ WARNING: your system will be hacked in ${countdown} second!`);
+                        countdown--;
+                    } else {
+                        clearInterval(prankInterval);
+                        document.body.classList.add("glitch-bg");
+                        document.getElementById("judul").classList.add("glitch");
+                        document.getElementById("typed-text").classList.add("glitch");
+
+                        setTimeout(() => {
+                            alert("💥 SYSTEM HACKED... (nda katu 😎)\nSELAMAT ULANG TAHUN BNG YURUN 🎉🎉");
+                            document.body.classList.remove("glitch-bg");
+                            document.getElementById("judul").classList.remove("glitch");
+                            document.getElementById("typed-text").classList.remove("glitch");
+                        }, 3000);
+                    }
+                }, 1000);
+            }, 3000);
+        }
+
+        window.onload = typeText;
+    </script>
+</body>
+
+</html>
